@@ -6,14 +6,16 @@ from email.mime.text import MIMEText
 from email.header import Header
 from email.mime.multipart import MIMEMultipart
 
-def send_email(sender, receivers, sub, msg):
+def send_email_xlsx(sender, receivers, sub, msg):
 
 	today = datetime.now()
 	subject = '[' + sub + ']' +  ' Overdue Loan Reminder ' + today.strftime('%Y-%m-%d')
 
 	msg.reset_index(drop=True, inplace=True)
-	msg.to_html(subject+'.html')
-
+	msg_html = msg.to_html()
+	with open(subject+'.html', "w", encoding="utf-8") as file:
+		file.write(msg_html)
+		
 	f=codecs.open(subject+'.html', 'r', encoding="utf-8")
 	
 	html = """\
