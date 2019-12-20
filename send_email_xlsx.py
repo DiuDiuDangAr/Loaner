@@ -15,7 +15,7 @@ def send_email_xlsx(sender, receivers, sub, msg):
 	msg_html = msg.to_html()
 	with open(subject+'.html', "w", encoding="utf-8") as file:
 		file.write(msg_html)
-		
+
 	f=codecs.open(subject+'.html', 'r', encoding="utf-8")
 	
 	html = """\
@@ -35,7 +35,6 @@ def send_email_xlsx(sender, receivers, sub, msg):
 </body>
 </html>
         """
-	print(html)
 	message = MIMEText(html, 'html')
 	message['Subject'] = subject
 
